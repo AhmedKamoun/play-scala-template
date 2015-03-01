@@ -5,6 +5,7 @@ val appVersion = "1.0-SNAPSHOT"
 
 val scalaAppVersion = "2.11.4"
 
+
 libraryDependencies ++= Seq(
   // Add your project dependencies here,
   "mysql" % "mysql-connector-java" % "5.1.10",
