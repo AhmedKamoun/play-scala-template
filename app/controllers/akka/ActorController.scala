@@ -15,10 +15,11 @@ import repositories.person.{ManRepository, PersonRepository, WomanRepository}
 import repositories.queryDSL.ManQueryDsl
 import service._
 
+
 //http://www.toptal.com/scala/concurrency-and-fault-tolerance-made-easy-an-intro-to-akka
 //http://www.infoq.com/fr/articles/trio-akka-spring-scala
 //https://github.com/typesafehub/activator-akka-java-spring/tree/master/src/main/java/sample
-@stereotype.Controller
+//http://letitcrash.com/post/55958814293/akka-dependency-injection@stereotype.Controller
 class ActorController extends Controller {
 
   @Autowired
@@ -40,7 +41,7 @@ class ActorController extends Controller {
   val logger: Logger = Logger(this.getClass())
 
 
-  def socket = WebSocket.acceptWithActor[String, String] {
+ def socket = WebSocket.acceptWithActor[String, String] {
     request => out =>
 
       //var simple_actor: SimpleActor = actorSystem.actorOf(SpringExtension.SpringExtProvider.get(actorSystem).props("SimpleActor")).asInstanceOf[SimpleActor]
@@ -48,6 +49,33 @@ class ActorController extends Controller {
 
       val response = Json.obj("message" -> "hello world")
       SpringExtension.SpringExtProvider.get(actorSystem).props("EventActor", out, response)
+
+    //  MyWebSocketActor.props(out)
+  }
+
+  def invokeActor(msg: String) = Action {
+    actorSystem.actorSelection("/user/EventActor") ! msg
+    Ok("message sent :" + msg)
+  }
+
+
+  /**
+   *
+   *
+   *
+   *
+   */
+  object MyWebSocketActor {
+
+    def props(out: ActorRef) = Props(new MyWebSocketActor(out))
+  }
+
+  class MyWebSocketActor(out: ActorRef) extends Actor {
+    def receive = {
+      case msg: String =>
+        out ! ("I received your message: " + msg)
+    }
+
 
   }
 

@@ -3,7 +3,6 @@
 # ~~~~
 
 # Home page
-GET           /akka                          @controllers.akka.ActorController.socket()
 POST          /logging                       @controllers.Application.logging()
 GET           /HighFunction                  @controllers.Application.HighFunction()
 POST          /addMan                        @controllers.Application.submit()
@@ -18,6 +17,10 @@ POST          /addLikes                      @controllers.LikeController.addLike
 DELETE        /removeLikes                   @controllers.LikeController.removeLikesFromPerson()
 GET           /getLikes                      @controllers.LikeController.getLikesToPerson()
 GET           /getLikesBy                    @controllers.LikeController.getLikesBy(description :String)
+
+#akka test
+POST          /sender                        @controllers.akka.ActorController.invokeActor(msg:String)
+GET           /akka                          @controllers.akka.ActorController.socket()
 
 
 
