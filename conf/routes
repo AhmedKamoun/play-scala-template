@@ -1,0 +1,29 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET           /akka                          @controllers.akka.ActorController.socket()
+POST          /logging                       @controllers.Application.logging()
+GET           /HighFunction                  @controllers.Application.HighFunction()
+POST          /addMan                        @controllers.Application.submit()
+GET           /addWoman                      @controllers.Application.addWoman()
+POST          /addWoman                      @controllers.Application.submitWoman()
+PUT           /updateWoman                   @controllers.Application.updateWoman(id:String,name:String)
+GET           /artisteMen                    @controllers.Application.allArtistMen()
+GET           /persons                       @controllers.Application.allPersons()
+GET           /TimeElepsed/:startTime        @controllers.Application.compositeResponse(startTime:Long)
+
+POST          /addLikes                      @controllers.LikeController.addLikesToPerson()
+DELETE        /removeLikes                   @controllers.LikeController.removeLikesFromPerson()
+GET           /getLikes                      @controllers.LikeController.getLikesToPerson()
+GET           /getLikesBy                    @controllers.LikeController.getLikesBy(description :String)
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET           /assets/*file                  controllers.Assets.at(path="/public", file)
+
+
+
