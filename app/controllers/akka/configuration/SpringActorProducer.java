@@ -4,7 +4,7 @@ package controllers.akka.configuration;
 import akka.actor.Actor;
 import akka.actor.ActorRef;
 import akka.actor.IndirectActorProducer;
-import controllers.akka.EventActor;
+import controllers.akka.SimpleActor;
 import org.springframework.context.ApplicationContext;
 import play.api.libs.json.JsObject;
 
@@ -29,7 +29,7 @@ public class SpringActorProducer implements IndirectActorProducer {
     @Override
     public Actor produce() {
 
-        EventActor actor = (EventActor) applicationContext.getBean(actorBeanName);
+        SimpleActor actor = (SimpleActor) applicationContext.getBean(actorBeanName);
         actor.setOut(out);
         actor.setResponse(response);
         return actor;

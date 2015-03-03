@@ -18,9 +18,11 @@ DELETE        /removeLikes                   @controllers.LikeController.removeL
 GET           /getLikes                      @controllers.LikeController.getLikesToPerson()
 GET           /getLikesBy                    @controllers.LikeController.getLikesBy(description :String)
 
+#map read test
+GET           /searchFromMap                 @controllers.akka.AkkaController.searchFromMap(key:String)
 #akka test
-POST          /sender                        @controllers.akka.ActorController.invokeActor(msg:String)
-GET           /akka                          @controllers.akka.ActorController.socket()
+GET           /updateActor                   @controllers.akka.AkkaController.updateActor(id:String,msg:String)
+GET           /registerSocket                @controllers.akka.AkkaController.socket()
 
 
 
