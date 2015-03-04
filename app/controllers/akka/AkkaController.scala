@@ -65,6 +65,7 @@ class AkkaController extends Controller {
 
   def socket = WebSocket.acceptWithActor[String, String] {
     request => out =>
+      //TODO id is the identifier of the connected user
       val id = Random.alphanumeric.take(10).mkString
       ClientConnection.props(id, out)
   }

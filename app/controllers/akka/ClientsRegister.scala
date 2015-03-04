@@ -20,7 +20,8 @@ class ClientsRegister extends Actor {
     case AddClient(id, client) => {
       register += (id -> client)
       context watch client
-      Logger.info("new client created with id :" + id + ", register size:" + register.size)
+      Logger.info("new client created with id: " + id + ", register size:" + register.size)
+      //TODO we can control the limit number of created client socket actor. ex: connection_limit = 10
     }
 
     case UpdateClient(id, response) => {
@@ -42,19 +43,25 @@ class ClientsRegister extends Actor {
 
 object ClientsRegister {
 
+  var clients_register: ActorSelection = _
+
   /**
+   *
    * A good practice is to declare what messages an Actor can receive in the companion object of the Actor, which makes
    * easier to know what it can receive
    */
+  //Different received messages type
   case class AddClient(id: String, socket: ActorRef)
-
   case class UpdateClient(id: String, response: String)
 
-  var clients_register: ActorSelection = _
 
   def getRegister = Option(clients_register) match {
-    case Some(register) => register
+    case Some(register) => {
+      Logger.warn("Found register.")
+      register
+    }
     case None => {
+      Logger.warn("No register was found so search for it...")
       clients_register = Akka.system.actorSelection("/user/ClientsRegister")
       clients_register
     }
