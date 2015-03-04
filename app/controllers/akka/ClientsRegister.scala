@@ -1,17 +1,13 @@
 package controllers.akka
 
 import akka.actor.{Actor, ActorRef, ActorSelection, Terminated}
+import controllers.akka.ClientConnection.GuiUpdate
+import controllers.akka.ClientsRegister.{AddClient, UpdateClient}
 import play.api.Logger
 import play.api.Play.current
 import play.api.libs.concurrent.Akka
 
 import scala.collection.mutable
-
-case class AddClient(id: String, socket: ActorRef)
-
-case class UpdateClient(id: String, response: String)
-
-case class GuiUpdate(response: String)
 
 //TODO we can ameliorate more the register's concept by dividing it into different ones controlled by a register manager
 class ClientsRegister extends Actor {
@@ -45,6 +41,15 @@ class ClientsRegister extends Actor {
 }
 
 object ClientsRegister {
+
+  /**
+   * A good practice is to declare what messages an Actor can receive in the companion object of the Actor, which makes
+   * easier to know what it can receive
+   */
+  case class AddClient(id: String, socket: ActorRef)
+
+  case class UpdateClient(id: String, response: String)
+
   var clients_register: ActorSelection = _
 
   def getRegister = Option(clients_register) match {

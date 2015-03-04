@@ -2,6 +2,7 @@ package controllers.akka
 
 import java.util.{List => JList}
 
+import controllers.akka.ClientsRegister.UpdateClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.Logger
@@ -11,6 +12,8 @@ import repositories._
 import repositories.person.{ManRepository, PersonRepository, WomanRepository}
 import repositories.queryDSL.ManQueryDsl
 import service._
+
+import scala.util.Random
 
 
 //http://www.toptal.com/scala/concurrency-and-fault-tolerance-made-easy-an-intro-to-akka
@@ -62,8 +65,8 @@ class AkkaController extends Controller {
 
   def socket = WebSocket.acceptWithActor[String, String] {
     request => out =>
-
-      ClientConnection.props(out)
+      val id = Random.alphanumeric.take(10).mkString
+      ClientConnection.props(id, out)
   }
 
 
