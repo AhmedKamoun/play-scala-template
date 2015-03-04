@@ -1,4 +1,4 @@
-package controllers.akka.configuration;
+package controllers.akka.spring_integration_config;
 
 import akka.actor.ActorSystem;
 import org.springframework.beans.factory.annotation.Autowired;

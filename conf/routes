@@ -19,10 +19,11 @@ GET           /getLikes                      @controllers.LikeController.getLike
 GET           /getLikesBy                    @controllers.LikeController.getLikesBy(description :String)
 
 #map read test
-GET           /searchFromMap                 @controllers.akka.AkkaController.searchFromMap(key:String)
+GET           /searchFromMap                 @controllers.MapTestController.searchFromMap(key:String)
+
 #akka test
-GET           /updateActor                   @controllers.akka.AkkaController.updateActor(id:String,msg:String)
-GET           /registerSocket                @controllers.akka.AkkaController.socket()
+GET           /updateActor                   @controllers.akka.ConnectionController.updateActor(id:String,msg:String)
+GET           /registerSocket                @controllers.akka.ConnectionController.socket(id:String)
 
 
 

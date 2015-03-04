@@ -20,7 +20,7 @@ class ClientsRegister extends Actor {
     case AddClient(id, client) => {
       register += (id -> client)
       context watch client
-      Logger.info("new client created with id: " + id + ", register size:" + register.size)
+      Logger.info("new client created with id: " + id + " , register size:" + register.size)
       //TODO we can control the limit number of created client socket actor. ex: connection_limit = 10
     }
 

@@ -1,4 +1,4 @@
-package controllers.akka
+package controllers.akka.spring_integration_config
 
 import akka.actor.{Actor, ActorRef}
 import org.springframework.beans.factory.config.BeanDefinition
