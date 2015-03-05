@@ -1,5 +1,5 @@
 import akka.actor.Props
-import controllers.akka.ClientsRegister
+import controllers.akka.Register
 import org.springframework.context._
 import org.springframework.context.support._
 import play._
@@ -15,7 +15,7 @@ class Global extends GlobalSettings {
     ctx = new ClassPathXmlApplicationContext("spring-context-data.xml")
 
     //Create a register for client connection actor
-    val clientsRegister = Akka.system.actorOf(Props[ClientsRegister], name = "ClientsRegister")
+    val clientsRegister = Akka.system.actorOf(Props[Register], name = "ClientsRegister")
 
   }
 

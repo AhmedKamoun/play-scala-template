@@ -2,10 +2,10 @@ package controllers.akka
 
 import java.util.{List => JList}
 
-import controllers.akka.ClientsRegister.UpdateClient
 import org.springframework.stereotype
 import play.api.Logger
 import play.api.Play.current
+import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{Action, Controller, WebSocket}
 
 
@@ -15,23 +15,22 @@ import play.api.mvc.{Action, Controller, WebSocket}
 //http://letitcrash.com/post/55958814293/akka-dependency-injection@stereotype.Controller
 /**
  * La solution choisi pour resoudre le probleme du mise à jour des GUI clients suite à un server event est la creation
- * d'un registre HashMap (Id_user, Topic_user), si un event a été produit alors il sera enpilé dans le topic adequat ensuite
- * ce topic va diffuser l'update à toutes les web sockets inscrites dans ce dernier.
+ * d'un registre controllant tous les clients, si un event a été produit alors il sera envoyé vers le registre qui decidera
+ * l'acheminement vers le client adequat.Finallement le clients diffusera l'update à toutes ses connections.
+ * l'acheminement vers le client adequat.Finallement le clients diffusera l'update à toutes ses connections.
  */
 @stereotype.Controller
 class ConnectionController extends Controller {
 
   val logger: Logger = Logger(this.getClass())
 
-  def socket(user_id: String) = WebSocket.acceptWithActor[String, String] {
+  def socket(user_id: String) = WebSocket.acceptWithActor[String, JsValue] {
     request => out =>
-
-      ClientConnection.props(user_id, out)
+      Connection.props(user_id, out)
   }
 
-  def updateActor(id: String, msg: String) = Action {
-
-    ClientsRegister.getRegister ! UpdateClient(id, msg)
+  def updateActor(client_id: String, msg: String) = Action {
+    Register.update(client_id, Json.obj("message" -> msg))
     Ok
   }
 

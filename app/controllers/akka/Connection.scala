@@ -1,17 +1,12 @@
 package controllers.akka
 
 import akka.actor.{Actor, ActorRef, Props}
-import controllers.akka.ClientConnection.GuiUpdate
-import controllers.akka.ClientsRegister.AddClient
+import controllers.akka.Register.SaveConnection
+import play.api.libs.json.JsValue
 
 
-object ClientConnection {
+object Connection {
 
-  /**
-   * A good practice is to declare what messages an Actor can receive in the companion object of the Actor, which makes
-   * easier to know what it can receive
-   */
-  case class GuiUpdate(response: String)
 
   /**
    * Create Props for an actor of this type.It is a good idea to provide factory methods on the companion object of each Actor
@@ -19,23 +14,23 @@ object ClientConnection {
    * @return a Props for creating this actor, which can then be further configured
    *         (e.g. calling `.withDispatcher()` on it)
    */
-  def props(user_id: String, out: ActorRef) = Props(new ClientConnection(user_id, out))
+  def props(user_id: String, out: ActorRef) = Props(new Connection(user_id, out))
 }
 
 /**
  * This actor represents a client connection by webSocket
  *
  */
-class ClientConnection(user_id: String, out: ActorRef) extends Actor {
+class Connection(user_id: String, out: ActorRef) extends Actor {
 
   override def preStart() = {
     ///First,we should register this newly client connection
-    ClientsRegister.getRegister ! AddClient(user_id, self)
+    Register.getRegister ! SaveConnection(user_id, self)
   }
 
   def receive = {
 
-    case u: GuiUpdate => out ! u.response
+    case update: JsValue => out ! update
 
   }
 
