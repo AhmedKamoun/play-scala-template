@@ -22,8 +22,8 @@ GET           /getLikesBy                    @controllers.LikeController.getLike
 GET           /searchFromMap                 @controllers.MapTestController.searchFromMap(key:String)
 
 #akka test
-GET           /updateActor                   @controllers.akka.ConnectionController.updateActor(id:String,msg:String)
-GET           /registerSocket                @controllers.akka.ConnectionController.socket(id:String)
+GET           /updateActor                   @controllers.actors.ConnectionController.updateActor(id:String,msg:String)
+GET           /registerSocket                @controllers.actors.ConnectionController.socket(id:String)
 
 
 

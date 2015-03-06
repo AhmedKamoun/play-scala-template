@@ -1,5 +1,5 @@
 import akka.actor.Props
-import controllers.akka.Register
+import controllers.actors.Register
 import org.springframework.context._
 import org.springframework.context.support._
 import play._

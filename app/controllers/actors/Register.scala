@@ -1,8 +1,8 @@
-package controllers.akka
+package controllers.actors
 
 import akka.actor.{Actor, ActorRef, ActorSelection}
-import controllers.akka.Client.{BroadcastUpdate, addConnection}
-import controllers.akka.Register.{SaveConnection, UpdateClient}
+import controllers.actors.Client.{BroadcastUpdate, addConnection}
+import controllers.actors.Register.{SaveConnection, UpdateClient}
 import play.api.Logger
 import play.api.Play.current
 import play.api.libs.concurrent.Akka
@@ -38,7 +38,7 @@ object Register {
 }
 
 
-//TODO we can ameliorate more the register's concept by dividing it into different ones controlled by a register manager
+
 class Register extends Actor {
 
   def receive = {

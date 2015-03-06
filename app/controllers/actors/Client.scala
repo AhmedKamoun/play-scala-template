@@ -1,7 +1,7 @@
-package controllers.akka
+package controllers.actors
 
 import akka.actor._
-import controllers.akka.Client.{BroadcastUpdate, addConnection}
+import controllers.actors.Client.{BroadcastUpdate, addConnection}
 import play.api.Logger
 import play.api.libs.json.JsValue
 

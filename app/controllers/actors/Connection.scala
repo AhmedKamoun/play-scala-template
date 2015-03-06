@@ -1,7 +1,7 @@
-package controllers.akka
+package controllers.actors
 
 import akka.actor.{Actor, ActorRef, Props}
-import controllers.akka.Register.SaveConnection
+import controllers.actors.Register.SaveConnection
 import play.api.libs.json.JsValue
 
 

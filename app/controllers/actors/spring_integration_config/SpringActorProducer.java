@@ -1,10 +1,10 @@
-package controllers.akka.spring_integration_config;
+package controllers.actors.spring_integration_config;
 
 
 import akka.actor.Actor;
 import akka.actor.ActorRef;
 import akka.actor.IndirectActorProducer;
-import controllers.akka.spring_integration_config.SimpleActor;
+import controllers.actors.spring_integration_config.SimpleActor;
 import org.springframework.context.ApplicationContext;
 import play.api.libs.json.JsObject;
 
