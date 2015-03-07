@@ -2,13 +2,14 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-POST          /logging                       @controllers.Application.logging()
-GET           /HighFunction                  @controllers.Application.HighFunction()
+GET           /                              @controllers.login.Login.login()
+POST          /login                         @controllers.login.Login.submitLogin()
+POST          /registration                  @controllers.login.Login.submitRegistration()
+
+
 POST          /addMan                        @controllers.Application.submit()
 GET           /addWoman                      @controllers.Application.addWoman()
 POST          /addWoman                      @controllers.Application.submitWoman()
-PUT           /updateWoman                   @controllers.Application.updateWoman(id:String,name:String)
 GET           /artisteMen                    @controllers.Application.allArtistMen()
 GET           /persons                       @controllers.Application.allPersons()
 GET           /TimeElepsed/:startTime        @controllers.Application.compositeResponse(startTime:Long)

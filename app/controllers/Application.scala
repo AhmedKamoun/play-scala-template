@@ -2,8 +2,9 @@ package controllers
 
 import java.util.{List => JList}
 
-import entity.person.PersonDTOWrites._
-import entity.person.{Man, PersonDTO, Woman}
+import dto.PersonDTO
+import dto.PersonDTOWrites._
+import entity.person.{Man, Woman}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
@@ -43,12 +44,6 @@ class Application extends Controller {
       "name" -> text,
       "speciality" -> text
 
-    )
-  )
-
-  val likeManForm = Form(
-    single(
-      "artistID" -> text
     )
   )
 
@@ -100,19 +95,6 @@ class Application extends Controller {
       )
   }
 
-  def updateWoman(identifier: String, new_name: String) = Action {
-    Option(womanRepository.findOne(identifier)) match {
-      case Some(doc) => {
-        doc.setName(new_name)
-        var updated_doctor = womanRepository.save(doc)
-        Ok("updating woman... new name : " + updated_doctor.name)
-      }
-      case None => {
-        Ok("woman not found, enable to update his name")
-      }
-    }
-
-  }
 
   /**
    *
@@ -154,37 +136,5 @@ class Application extends Controller {
     //Ok(Json.prettyPrint(list))
   }
 
-  def logging() = Action {
-    try {
-      val man: Man = null
-      val a = man.age
-      Ok("success")
-    }
-    catch {
-      case ex: Exception => {
-        logger.error("HELLO EXCEPTION")
-        logger.info("HELLO EXCEPTION")
-        logger.debug("HELLO EXCEPTION")
-        logger.warn("HELLO EXCEPTION")
-        Ok("error")
-      }
-    }
-
-
-  }
-
-  ///////////////////////////////////
-  // HIGH ORDER FUNCTION
-  // http://danielwestheide.com/blog/2013/01/23/the-neophytes-guide-to-scala-part-10-staying-dry-with-higher-order-functions.html
-
-  def HighFunction() = Action {
-    Ok(Json.toJson(functionC(10)))
-  }
-
-  val functionA: Int => String = x => x.toString
-
-  val functionB: String => Boolean = s => s.equals("10")
-
-  val functionC = functionA andThen (functionB(_))
 
 }
