@@ -3,7 +3,7 @@ package controllers.login
 import java.util.{List => JList}
 
 import entity.person.User
-import org.joda.time.{DateTimeZone, DateTime}
+import org.joda.time.{DateTime, DateTimeZone}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.Logger
@@ -98,7 +98,8 @@ class Login extends Controller with Secured {
           new_user.createdOn = DateTime.now(DateTimeZone.UTC) //relatively to UTC
           userRepository.save(new_user)
           Logger.debug("registration succeeded !")
-          Ok("new user has been created")
+          val session = request.session + ("APPLICATION.USER_ID" -> new_user.id)
+          Redirect(controllers.login.routes.Login.index).withSession(session)
         }
       )
   }
