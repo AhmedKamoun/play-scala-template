@@ -14,7 +14,7 @@ object Connection {
    * @return a Props for creating this actor, which can then be further configured
    *         (e.g. calling `.withDispatcher()` on it)
    */
-  def props(user_id: String, out: ActorRef) = Props(new Connection(user_id, out))
+  def props(user_id: String)(out: ActorRef) = Props(new Connection(user_id, out))
 }
 
 /**
