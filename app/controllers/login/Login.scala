@@ -3,19 +3,19 @@ package controllers.login
 import java.util.{List => JList}
 
 import entity.person.User
-import org.joda.time.{DateTime, DateTimeZone}
+import org.joda.time.{DateTimeZone, DateTime}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.Logger
 import play.api.data.Forms._
 import play.api.data._
-import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
 import repositories.person.UserRepository
+import security.Secured
 import service.tools
 
 @stereotype.Controller
-class Login extends Controller {
+class Login extends Controller with Secured {
   @Autowired
   var userRepository: UserRepository = _
 
@@ -43,7 +43,22 @@ class Login extends Controller {
 
 
   def login() = Action {
-    Ok(views.html.login.login(login_form, registration))
+    request =>
+      request.session.get("APPLICATION.USER_ID") match {
+        case Some(user_id) => Redirect(controllers.login.routes.Login.index)
+        case None => Ok(views.html.login.login(login_form, registration))
+      }
+
+  }
+
+  def index() = IsAuthenticated {
+    request => userID =>
+      Ok(views.html.login.index())
+  }
+
+  def logout() = IsAuthenticated {
+    request => userID =>
+      Redirect(controllers.login.routes.Login.login()).withNewSession
   }
 
   def submitLogin() = Action {
@@ -57,11 +72,9 @@ class Login extends Controller {
         SucceededForm => {
           Logger.debug("login succeeded !")
           val user = userRepository.findByEmail(SucceededForm._1)
-          Ok(
-            Json.obj(
-              "email" -> user.email,
-              "username" -> user.username
-            ))
+          val session = request.session + ("APPLICATION.USER_ID" -> user.id)
+
+          Redirect(controllers.login.routes.Login.index).withSession(session)
         }
       )
   }

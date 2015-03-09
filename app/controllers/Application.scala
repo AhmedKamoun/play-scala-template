@@ -16,13 +16,14 @@ import play.api.mvc.{Action, _}
 import repositories._
 import repositories.person.{ManRepository, PersonRepository, WomanRepository}
 import repositories.queryDSL.ManQueryDsl
+import security.Secured
 import service._
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 
 @stereotype.Controller
-class Application extends Controller {
+class Application extends Controller with Secured {
 
   @Autowired
   var womanRepository: WomanRepository = _
@@ -107,19 +108,20 @@ class Application extends Controller {
   }
 
 
-  def allPersons() = Action {
-    var response: ListBuffer[PersonDTO] = new ListBuffer[PersonDTO]
+  def allPersons() = IsAuthenticated {
+    request => userID =>
+      var response: ListBuffer[PersonDTO] = new ListBuffer[PersonDTO]
 
-    for (dto <- personRepository.findPersonsInPrivateSector().toList) {
-      if (dto.person.isInstanceOf[Man])
-        dto.sex = "male"
-      else
-        dto.sex = "female"
-      response += dto
-    }
-    Ok(
-      Json.prettyPrint(Json.obj("all_persons" -> response.toList))
-    )
+      for (dto <- personRepository.findPersonsInPrivateSector().toList) {
+        if (dto.person.isInstanceOf[Man])
+          dto.sex = "male"
+        else
+          dto.sex = "female"
+        response += dto
+      }
+      Ok(
+        Json.prettyPrint(Json.obj("all_persons" -> response.toList))
+      )
   }
 
   /**

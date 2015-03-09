@@ -5,6 +5,8 @@
 GET           /                              @controllers.login.Login.login()
 POST          /login                         @controllers.login.Login.submitLogin()
 POST          /registration                  @controllers.login.Login.submitRegistration()
+GET           /index                         @controllers.login.Login.index()
+GET           /logout                        @controllers.login.Login.logout()
 
 
 POST          /addMan                        @controllers.Application.submit()
