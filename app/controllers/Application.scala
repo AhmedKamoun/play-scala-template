@@ -49,9 +49,12 @@ class Application extends Controller with Secured {
   def configRead() = Action {
     implicit request =>
 
-      play.Play.application.configuration.getDoubleList("stations").foreach { station =>
-        logger.debug(s"STATION: $station")
-      }
+      val origin = request.headers.get(ORIGIN).getOrElse("*")
+      if (play.Play.application.configuration.getStringList("allowed_origins").contains(origin))
+        logger.warn(origin + " is allowed")
+      else
+        logger.warn(origin + " is not allowed")
+
       Ok
   }
 
