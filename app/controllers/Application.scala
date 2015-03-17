@@ -1,7 +1,5 @@
 package controllers
 
-import java.util.{List => JList}
-
 import dto.PersonDTO
 import dto.PersonDTOWrites._
 import entity.person.{Man, Woman}
@@ -47,6 +45,16 @@ class Application extends Controller with Secured {
 
     )
   )
+
+  def configRead() = Action {
+    implicit request =>
+
+      play.Play.application.configuration.getDoubleList("stations").foreach { station =>
+        logger.debug(s"STATION: $station")
+      }
+      Ok
+  }
+
 
   def submit() = Action {
     implicit request =>

@@ -8,6 +8,7 @@ POST          /registration                  @controllers.login.Login.submitRegi
 GET           /index                         @controllers.login.Login.index()
 GET           /logout                        @controllers.login.Login.logout()
 
+GET           /configRead                    @controllers.Application.configRead()
 
 POST          /addMan                        @controllers.Application.submit()
 GET           /addWoman                      @controllers.Application.addWoman()
