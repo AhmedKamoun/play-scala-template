@@ -1,31 +1,34 @@
-import akka.actor.Props
-import controllers.actors.Register
-import org.springframework.context._
-import org.springframework.context.support._
-import play.api.Play.current
-import play.api.libs.concurrent.Akka
-import play.api.mvc.WithFilters
-import play.api.{Application, GlobalSettings}
-import play.filters.headers.SecurityHeadersFilter
-import security.filters.CORSFilter
+import play.api.GlobalSettings
 
 
-object Global extends WithFilters(CORSFilter, SecurityHeadersFilter()) with GlobalSettings {
+object Global extends GlobalSettings {
 
-  private var ctx: ApplicationContext = _
+  /*
 
-  override def onStart(app: Application) {
+  private def getSubdomain (request: RequestHeader) = request.domain.replaceFirst("[\\.]?[^\\.]+[\\.][^\\.]+$", "")
 
-    ctx = new ClassPathXmlApplicationContext("spring-context-data.xml")
+   override def onRouteRequest (request: RequestHeader) = getSubdomain(request) match {
+     case "admin" => admin.Routes.routes.lift(request)
+     case _ => web.Routes.routes.lift(request)
+   }
 
-    //Create a register for client connection actor
-    val clientsRegister = Akka.system.actorOf(Props[Register], name = "ClientsRegister")
+   // 404 - page not found error
+   override def onHandlerNotFound (request: RequestHeader) = getSubdomain(request) match {
+     case "admin" => GlobalAdmin.onHandlerNotFound(request)
+     case _ => GlobalWeb.onHandlerNotFound(request)
+   }
 
-  }
+   // 500 - internal server error
+   override def onError (request: RequestHeader, throwable: Throwable) = getSubdomain(request) match {
+     case "admin" => GlobalAdmin.onError(request, throwable)
+     case _ => GlobalWeb.onError(request, throwable)
+   }
 
-  override def getControllerInstance[A](clazz: Class[A]): A = {
-    ctx.getBean(clazz).asInstanceOf[A]
+   // called when a route is found, but it was not possible to bind the request parameters
+   override def onBadRequest (request: RequestHeader, error: String) = getSubdomain(request) match {
+     case "admin" => GlobalAdmin.onBadRequest(request, error)
+     case _ => GlobalWeb.onBadRequest(request, error)
+   }
 
-  }
-
+   */
 }
