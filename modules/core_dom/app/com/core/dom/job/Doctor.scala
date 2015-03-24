@@ -1,4 +1,4 @@
-package entity.job
+package com.core.dom.job
 
 import javax.persistence._
 
@@ -6,9 +6,10 @@ import scala.beans.BeanProperty
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-class Artist extends Job {
+class Doctor extends Job {
 
   @BeanProperty
-  var instrument: String = _
+  var speciality: String = _
+
 
 }

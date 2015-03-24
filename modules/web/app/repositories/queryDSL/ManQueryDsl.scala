@@ -2,13 +2,13 @@ package repositories.queryDSL
 
 import java.util.{List => JList}
 
+import com.core.dom.person.{Man, Person}
 import com.mysema.query.types.expr.BooleanExpression
 import com.mysema.query.types.path._
 import com.mysema.query.{BooleanBuilder, Tuple}
-import entity.person.{Man, Person}
 import org.joda.time.{DateTime, DateTimeConstants}
 import org.springframework.stereotype.Repository
-import play.api.libs.json.{JsNumber, JsBoolean, JsArray, Json}
+import play.api.libs.json.{JsArray, JsBoolean, Json}
 
 import scala.collection.JavaConversions._
 
@@ -63,14 +63,12 @@ class ManQueryDsl extends QueryDslRepository {
     for (row: Tuple <- list) {
       personElem = personElem + ("name" -> Json.toJson(row.get(name)))
       personElem = personElem + ("like" -> JsBoolean(row.get(nameLike("kam"))))
-    //  personElem = personElem + ("count" -> Json.toJson(person.count().longValue()))
+      //  personElem = personElem + ("count" -> Json.toJson(person.count().longValue()))
 
       array = array :+ personElem
     }
     array
   }
-
-
 
 
   /*

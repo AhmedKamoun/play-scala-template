@@ -1,6 +1,6 @@
 package dto
 
-import entity.person.Person
+import com.core.dom.person.Person
 import play.api.libs.json.{Json, Writes}
 
 case class PersonDTO(var person: Person, var sex: String)

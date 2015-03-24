@@ -1,8 +1,8 @@
-package entity.job
+package com.core.dom.job
 
 import javax.persistence._
 
-import entity.SuperEntity
+import com.core.dom.SuperEntity
 
 import scala.beans.BeanProperty
 

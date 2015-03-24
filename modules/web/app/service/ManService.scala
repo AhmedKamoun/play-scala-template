@@ -1,16 +1,12 @@
 package service
 
 import java.util.{List => JList}
-
-import entity.LikePerson
-import org.joda.time.DateTime
+import com.core.dom.LikePerson
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import repositories._
 import repositories.person.ManRepository
-
 import scala.collection.JavaConversions._
 
 @Service

@@ -1,8 +1,7 @@
 package controllers.web.login
 
 import java.util.{List => JList}
-
-import entity.person.User
+import com.core.dom.person.User
 import org.joda.time.{DateTime, DateTimeZone}
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype

@@ -29,7 +29,7 @@ object Common {
     // ...
   )
 
-  def appName = "SCALA_PLAY_SPRING_HIBERNATE"
+  def appName = "Kamoun_Application"
 
   // Settings for every service, i.e. for admin and web subprojects
   def serviceSettings(module: String) = moduleSettings(module) ++: Seq(
@@ -49,7 +49,7 @@ object Common {
   // Common settings for every project
   def settings(theName: String) = Seq(
     name := theName,
-    organization := "kamoun.application",
+    organization := "kamoun.org",
     version := "1.0-SNAPSHOT",
     scalaVersion := "2.11.4",
     doc in Compile <<= target.map(_ / "none"),

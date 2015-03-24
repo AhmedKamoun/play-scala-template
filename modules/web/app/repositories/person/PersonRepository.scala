@@ -1,7 +1,7 @@
 package repositories.person
 
+import com.core.dom.person.Person
 import dto.PersonDTO
-import entity.person.Person
 import org.springframework.data.jpa.repository.{JpaRepository, Query}
 import org.springframework.stereotype.Repository
 

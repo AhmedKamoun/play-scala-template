@@ -1,9 +1,9 @@
-package entity.person
+package com.core.dom.person
 
 import javax.persistence._
 
-import entity.job.Job
-import entity.{LikePerson, SuperEntity}
+import com.core.dom.job.Job
+import com.core.dom.{LikePerson, SuperEntity}
 import org.hibernate.annotations.Type
 import org.joda.time.DateTime
 

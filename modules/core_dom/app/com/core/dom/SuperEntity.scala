@@ -1,11 +1,10 @@
-package entity
+package com.core.dom
 
 import javax.persistence.{Column, GeneratedValue, Id, MappedSuperclass}
+
 import org.hibernate.annotations.GenericGenerator
 
-/**
- * Created by root on 10/12/14.
- */
+
 @MappedSuperclass
 abstract class SuperEntity extends Serializable {
   /*

@@ -1,8 +1,8 @@
 package controllers.web
 
+import com.core.dom.person.{Man, Woman}
 import dto.PersonDTO
 import dto.PersonDTOWrites._
-import entity.person.{Man, Woman}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
@@ -45,7 +45,6 @@ class Application extends Controller with Secured {
 
     )
   )
-
 
 
   def submit() = Action {

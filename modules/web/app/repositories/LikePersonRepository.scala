@@ -1,7 +1,7 @@
 package repositories
 
-import entity.LikePerson
-import entity.person.Man
+import com.core.dom.LikePerson
+import com.core.dom.person.Man
 import org.springframework.data.jpa.repository.{JpaRepository, Query}
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository

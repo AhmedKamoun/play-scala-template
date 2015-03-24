@@ -1,4 +1,4 @@
-package entity.person
+package com.core.dom.person
 
 import java.math.BigInteger
 import java.security.{MessageDigest, NoSuchAlgorithmException}

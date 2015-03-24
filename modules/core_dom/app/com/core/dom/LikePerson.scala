@@ -1,6 +1,7 @@
-package entity
+package com.core.dom
 
 import javax.persistence._
+
 import scala.beans.BeanProperty
 
 @Entity

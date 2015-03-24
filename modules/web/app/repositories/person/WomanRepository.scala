@@ -1,6 +1,6 @@
 package repositories.person
 
-import entity.person.Woman
+import com.core.dom.person.Woman
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
