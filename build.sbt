@@ -27,6 +27,8 @@ libraryDependencies ++= Seq(
   "c3p0" % "c3p0" % "0.9.1.2"
 )
 
+libraryDependencies += filters
+
 // Scala Compiler Options
 scalacOptions in ThisBuild ++= Seq(
   "-target:jvm-1.7",

@@ -30,10 +30,11 @@ class LikeController extends Controller {
 
   def addLikesToPerson() = Action {
 
-    manService.addLikes()
+//    manService.addLikes()
 
     Ok(Json.prettyPrint(Json.obj("insert" -> "done!")))
   }
+
 
   def removeLikesFromPerson() = Action {
 

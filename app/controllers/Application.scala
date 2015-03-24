@@ -46,17 +46,6 @@ class Application extends Controller with Secured {
     )
   )
 
-  def configRead() = Action {
-    implicit request =>
-
-      val origin = request.headers.get(ORIGIN).getOrElse("*")
-      if (play.Play.application.configuration.getStringList("allowed_origins").contains(origin))
-        logger.warn(origin + " is allowed")
-      else
-        logger.warn(origin + " is not allowed")
-
-      Ok
-  }
 
 
   def submit() = Action {

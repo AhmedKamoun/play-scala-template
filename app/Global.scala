@@ -2,11 +2,15 @@ import akka.actor.Props
 import controllers.actors.Register
 import org.springframework.context._
 import org.springframework.context.support._
-import play._
 import play.api.Play.current
 import play.api.libs.concurrent.Akka
+import play.api.mvc.WithFilters
+import play.api.{Application, GlobalSettings}
+import play.filters.headers.SecurityHeadersFilter
+import security.filters.CORSFilter
 
-class Global extends GlobalSettings {
+
+object Global extends WithFilters(CORSFilter, SecurityHeadersFilter()) with GlobalSettings {
 
   private var ctx: ApplicationContext = _
 

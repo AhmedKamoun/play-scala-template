@@ -134,4 +134,8 @@ class Login extends Controller with Secured {
     }
   }
 
+
+  def options(all: String) = Action {
+    Ok("")
+  }
 }
