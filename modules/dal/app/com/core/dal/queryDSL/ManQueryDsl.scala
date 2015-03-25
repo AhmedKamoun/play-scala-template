@@ -1,4 +1,4 @@
-package repositories.queryDSL
+package com.core.dal.queryDSL
 
 import java.util.{List => JList}
 

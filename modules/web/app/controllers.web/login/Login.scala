@@ -1,6 +1,8 @@
 package controllers.web.login
 
 import java.util.{List => JList}
+
+import com.core.dal.person.UserRepository
 import com.core.dom.person.User
 import org.joda.time.{DateTime, DateTimeZone}
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +11,6 @@ import play.api.Logger
 import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc.{Action, _}
-import repositories.person.UserRepository
 import security.Secured
 import service.tools
 

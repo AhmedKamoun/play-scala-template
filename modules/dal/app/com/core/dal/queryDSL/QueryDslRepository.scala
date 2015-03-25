@@ -1,4 +1,4 @@
-package repositories.queryDSL
+package com.core.dal.queryDSL
 
 import javax.persistence.{EntityManager, PersistenceContext}
 

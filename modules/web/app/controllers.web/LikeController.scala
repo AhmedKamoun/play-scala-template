@@ -2,14 +2,14 @@ package controllers.web
 
 import java.util.{List => JList}
 
+import com.core.dal.LikePersonRepository
+import com.core.dal.person.{ManRepository, WomanRepository}
+import com.core.dal.queryDSL.ManQueryDsl
+import com.core.service.ManService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
-import repositories._
-import repositories.person.{ManRepository, WomanRepository}
-import repositories.queryDSL.ManQueryDsl
-import service._
 
 import scala.collection.JavaConversions._
 
@@ -30,7 +30,7 @@ class LikeController extends Controller {
 
   def addLikesToPerson() = Action {
 
-//    manService.addLikes()
+    //    manService.addLikes()
 
     Ok(Json.prettyPrint(Json.obj("insert" -> "done!")))
   }

@@ -17,7 +17,7 @@
             				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
     <tx:annotation-driven/>
 
-    <context:component-scan base-package="controllers.web, repositories, service"/>
+    <context:component-scan base-package="controllers.web, com.core.dal, com.core.service"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
@@ -28,7 +28,7 @@
     </bean>
 
     <!-- Used for Spring DATA JPA -->
-    <jpa:repositories base-package="repositories"/>
+    <jpa:repositories base-package="com.core.dal"/>
 
     <bean class="org.springframework.orm.jpa.JpaTransactionManager"
           id="transactionManager">

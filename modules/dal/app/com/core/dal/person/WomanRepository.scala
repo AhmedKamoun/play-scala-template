@@ -1,4 +1,4 @@
-package repositories.person
+package com.core.dal.person
 
 import com.core.dom.person.Woman
 import org.springframework.data.jpa.repository.JpaRepository

@@ -1,12 +1,14 @@
-package service
+package com.core.service
 
 import java.util.{List => JList}
+
+import com.core.dal.LikePersonRepository
+import com.core.dal.person.ManRepository
 import com.core.dom.LikePerson
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import repositories._
-import repositories.person.ManRepository
+
 import scala.collection.JavaConversions._
 
 @Service

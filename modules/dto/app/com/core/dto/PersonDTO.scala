@@ -1,4 +1,4 @@
-package dto
+package com.core.dto
 
 import com.core.dom.person.Person
 import play.api.libs.json.{Json, Writes}

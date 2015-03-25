@@ -1,8 +1,12 @@
 package controllers.web
 
+import com.core.dal.LikePersonRepository
+import com.core.dal.person.{ManRepository, PersonRepository, WomanRepository}
+import com.core.dal.queryDSL.ManQueryDsl
 import com.core.dom.person.{Man, Woman}
-import dto.PersonDTO
-import dto.PersonDTOWrites._
+import com.core.dto.PersonDTO
+import com.core.dto.PersonDTOWrites._
+import com.core.service.ManService
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
@@ -11,11 +15,7 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
-import repositories._
-import repositories.person.{ManRepository, PersonRepository, WomanRepository}
-import repositories.queryDSL.ManQueryDsl
 import security.Secured
-import service._
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer

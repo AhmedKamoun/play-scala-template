@@ -2,10 +2,16 @@ import play.PlayScala
 
 Common.appSettings
 
-lazy val core_dom = (project in file("modules/core_dom")).enablePlugins(PlayScala)
+lazy val dom = (project in file("modules/dom")).enablePlugins(PlayScala)
 
-lazy val web = (project in file("modules/web")).enablePlugins(PlayScala).dependsOn(core_dom)
+lazy val dto = (project in file("modules/dto")).enablePlugins(PlayScala).dependsOn(dom)
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(core_dom, web).dependsOn(core_dom, web)
+lazy val dal = (project in file("modules/dal")).enablePlugins(PlayScala).dependsOn(dom, dto)
+
+lazy val bl = (project in file("modules/bl")).enablePlugins(PlayScala).dependsOn(dom, dto, dal)
+
+lazy val web = (project in file("modules/web")).enablePlugins(PlayScala).dependsOn(dom, dal, dto, bl)
+
+lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(dom, dal, web).dependsOn(dom, dal, bl, dto, web)
 
 libraryDependencies ++= Common.commonDependencies

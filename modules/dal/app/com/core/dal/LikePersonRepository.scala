@@ -1,4 +1,4 @@
-package repositories
+package com.core.dal
 
 import com.core.dom.LikePerson
 import com.core.dom.person.Man
