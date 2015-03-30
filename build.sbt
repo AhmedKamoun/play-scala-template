@@ -12,6 +12,8 @@ lazy val bl = (project in file("modules/bl")).enablePlugins(PlayScala).dependsOn
 
 lazy val web = (project in file("modules/web")).enablePlugins(PlayScala).dependsOn(dom, dal, dto, bl)
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(dom, dal, web).dependsOn(dom, dal, bl, dto, web)
+lazy val admin = (project in file("modules/admin")).enablePlugins(PlayScala).dependsOn(dom, dal, dto, bl)
+
+lazy val root = (project in file(".")).enablePlugins(PlayScala).aggregate(dom, dal, bl, dto, web, admin).dependsOn(dom, dal, bl, dto, web, admin)
 
 libraryDependencies ++= Common.commonDependencies

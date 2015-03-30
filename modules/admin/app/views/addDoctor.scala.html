@@ -1,0 +1,18 @@
+@(addArtist: Form[_])
+
+    @import helper._
+
+
+    @main("Add doctor") {
+
+        @form(action = controllers.web.routes.Application.submitWoman, args = 'id -> "helloForm") {
+
+            @inputText(field = addArtist("name"), 'placeholder -> "name")
+
+            @inputText(field = addArtist("speciality"), 'placeholder -> "Doctor")
+
+            <p class="buttons">
+                <input type="submit" id="submit">
+            <p>
+        }
+    }
