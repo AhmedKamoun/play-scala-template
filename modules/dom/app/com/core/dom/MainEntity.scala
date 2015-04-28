@@ -6,7 +6,7 @@ import org.hibernate.annotations.GenericGenerator
 
 
 @MappedSuperclass
-abstract class SuperEntity extends Serializable {
+abstract class MainEntity extends Serializable {
   /*
 	 * the technical database and object key.
 	 */

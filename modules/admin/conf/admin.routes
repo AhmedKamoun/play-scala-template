@@ -1,0 +1,24 @@
+# WEB Routes
+# This file defines WEB application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+#http://windrush.io/tech/2013/12/17/cors-and-play.html
+#make this the first rule: OPTIONS preflight request:
+OPTIONS        /*all                @controllers.admin.login.Login.options(all)
+
+GET            /                    @controllers.admin.login.Login.login()
+POST           /login               @controllers.admin.login.Login.submitLogin()
+GET            /index               @controllers.admin.login.Login.index()
+GET            /logout              @controllers.admin.login.Login.logout()
+
+GET            /adminInfo           @controllers.admin.Application.getAdmin()
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET            /assets/*file        controllers.Assets.at(path="/public", file)

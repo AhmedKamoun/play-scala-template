@@ -12,12 +12,12 @@ trait Secured {
   /**
    * Retrieve the connected user login.
    */
-  private def login(request: RequestHeader) = request.session.get("APPLICATION.USER_ID")
+  private def login(request: RequestHeader) = request.session.get("APPLICATION.ADMIN_ID")
 
   /**
    * Redirect to login if the user in not authorized.
    */
-  private def onUnauthorized(request: RequestHeader) = Results.Redirect(controllers.web.login.routes.Login.login())
+  private def onUnauthorized(request: RequestHeader) = Results.Redirect(controllers.admin.login.routes.Login.login())
 
   /**
    * Action for authenticated users.
@@ -34,8 +34,8 @@ trait Secured {
 
   def IsAuthenticated[A](b: BodyParser[A])(f: => String => Request[A] => Result) =
     Security.Authenticated(login, onUnauthorized) {
-      userAccount =>
-        Action(b)(request => f(userAccount)(request))
+      administrator =>
+        Action(b)(request => f(administrator)(request))
     }
 
 

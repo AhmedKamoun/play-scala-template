@@ -3,7 +3,7 @@ package com.core.dom.person
 import javax.persistence._
 
 import com.core.dom.job.Job
-import com.core.dom.{LikePerson, SuperEntity}
+import com.core.dom.{LikePerson, MainEntity}
 import org.hibernate.annotations.Type
 import org.joda.time.DateTime
 
@@ -11,7 +11,7 @@ import scala.beans.BeanProperty
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-abstract class Person extends SuperEntity {
+abstract class Person extends MainEntity {
 
   @BeanProperty
   var name: String = _
