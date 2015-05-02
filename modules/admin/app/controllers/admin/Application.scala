@@ -16,7 +16,7 @@ class Application extends SecuredController {
   val logger: Logger = Logger(this.getClass())
 
 
-  def getAdmin() = IsAuthorized(accessPermissionRepository.findByValue("user-management")) {
+  def getAdmin() = IsAuthorized(accessPermissionRepository.findByIdentifier("user-management")) {
     administratorID => implicit request =>
 
       Ok("Hello admin!")

@@ -2,19 +2,20 @@ package controllers.admin.login
 
 import java.util.{List => JList}
 
-import com.core.dal.admin.AdministratorRepository
+import com.core.service.utils.TokenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.Logger
 import play.api.data.Forms._
 import play.api.data._
-import play.api.mvc.{Action, _}
-import security.Secured
+import play.api.mvc.Action
+import security.SecuredController
 
 @stereotype.Controller
-class Login extends Controller with Secured {
+class Login extends SecuredController {
+
   @Autowired
-  var administratorRepository: AdministratorRepository = _
+  var tokenService: TokenService = _
 
   val logger: Logger = Logger(this.getClass())
 
@@ -23,7 +24,7 @@ class Login extends Controller with Secured {
       "email" -> email,
       "password" -> nonEmptyText
 
-    ) verifying("error login!", result => result match {
+    ) verifying("error login, invalid email or password!", result => result match {
       case (email, password) => authenticate(email, password)
     })
   )
@@ -31,20 +32,10 @@ class Login extends Controller with Secured {
   def login() = Action {
     request =>
       request.session.get("APPLICATION.ADMIN_ID") match {
-        case Some(user_id) => Redirect(controllers.admin.login.routes.Login.index)
+        case Some(user_id) => Ok("you are already logged in!")
         case None => Ok(views.html.login.login(login_form))
       }
 
-  }
-
-  def index() = IsAuthenticated {
-    request => userID =>
-      Ok(views.html.login.index())
-  }
-
-  def logout() = IsAuthenticated {
-    request => userID =>
-      Redirect(controllers.admin.login.routes.Login.login()).withNewSession
   }
 
   def submitLogin() = Action {
@@ -57,12 +48,15 @@ class Login extends Controller with Secured {
         ,
         SucceededForm => {
           Logger.debug("login succeeded !")
-          val user = administratorRepository.findByEmail(SucceededForm._1)
-          val session = request.session + ("APPLICATION.ADMIN_ID" -> user.id)
-
-          Redirect(controllers.admin.login.routes.Login.index).withSession(session)
+          val admin = administratorRepository.findByEmail(SucceededForm._1)
+          Ok(tokenService.generateToken(Map("admin_id" -> admin.id))) //return token
         }
       )
+  }
+
+  def index() = IsAuthenticated {
+    admin_id => request =>
+      Ok("admin with id " + admin_id + " has a valid token, he can access to this api")
   }
 
 
@@ -87,6 +81,6 @@ class Login extends Controller with Secured {
 
 
   def options(all: String) = Action {
-    Ok("")
+    Ok
   }
 }

@@ -14,8 +14,6 @@ OPTIONS        /*all                @controllers.admin.login.Login.options(all)
 GET            /                    @controllers.admin.login.Login.login()
 POST           /login               @controllers.admin.login.Login.submitLogin()
 GET            /index               @controllers.admin.login.Login.index()
-GET            /logout              @controllers.admin.login.Login.logout()
-
 GET            /adminInfo           @controllers.admin.Application.getAdmin()
 
 

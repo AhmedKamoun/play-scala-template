@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository
 
 @Repository
 trait AccessPermissionRepository extends JpaRepository[AccessPermission, String] {
-  @Query("SELECT ap FROM AccessPermission ap  WHERE value = :permission ")
-  def findByValue(@Param("permission") value: String): AccessPermission
+  @Query("SELECT ap FROM AccessPermission ap  WHERE identifier = :identifier ")
+  def findByIdentifier(@Param("identifier") identifier: String): AccessPermission
 
 
 }

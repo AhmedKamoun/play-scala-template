@@ -22,7 +22,8 @@ object Common {
     "com.mysema.querydsl" % "querydsl-jpa" % "3.4.3",
     "com.mysema.querydsl" % "querydsl-apt" % "3.4.3",
     "cglib" % "cglib" % "3.1",
-    "c3p0" % "c3p0" % "0.9.1.2"
+    "c3p0" % "c3p0" % "0.9.1.2",
+    "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1"
     // Add here more common dependencies:
     // jdbc,
     // anorm,
@@ -54,17 +55,17 @@ object Common {
     scalaVersion := "2.11.4",
     doc in Compile <<= target.map(_ / "none"),
     scalacOptions in ThisBuild ++= Seq(
-  "-target:jvm-1.7",
-  "-encoding", "UTF-8",
-  "-deprecation", // warning and location for usages of deprecated APIs
-  "-feature", // warning and location for usages of features that should be imported explicitly
-  "-unchecked", // additional warnings where generated code depends on assumptions
-  "-language:reflectiveCalls",
-  "-Xlint", // recommended additional warnings
-  "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver
-  "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
-  "-Ywarn-inaccessible",
-  "-Ywarn-dead-code"
-  )
+      "-target:jvm-1.7",
+      "-encoding", "UTF-8",
+      "-deprecation", // warning and location for usages of deprecated APIs
+      "-feature", // warning and location for usages of features that should be imported explicitly
+      "-unchecked", // additional warnings where generated code depends on assumptions
+      "-language:reflectiveCalls",
+      "-Xlint", // recommended additional warnings
+      "-Ywarn-adapted-args", // Warn if an argument list is modified to match the receiver
+      "-Ywarn-value-discard", // Warn when non-Unit expression results are unused
+      "-Ywarn-inaccessible",
+      "-Ywarn-dead-code"
+    )
   )
 }

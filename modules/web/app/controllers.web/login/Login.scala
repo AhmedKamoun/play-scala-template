@@ -2,6 +2,7 @@ package controllers.web.login
 
 import java.util.{List => JList}
 
+import authentikat.jwt.{JsonWebToken, JwtClaimsSet, JwtHeader}
 import com.core.dal.person.UserRepository
 import com.core.dom.person.User
 import org.joda.time.{DateTime, DateTimeZone}
@@ -74,9 +75,21 @@ class Login extends Controller with Secured {
           val user = userRepository.findByEmail(SucceededForm._1)
           val session = request.session + ("APPLICATION.USER_ID" -> user.id)
 
-          Redirect(controllers.web.login.routes.Login.index).withSession(session)
+          //Redirect(controllers.web.login.routes.Login.index).withSession(session)
+          Ok(generateToken()) //return token
         }
       )
+  }
+
+  def generateToken(): String = {
+    val header = JwtHeader("HS256")
+    var claimsMap: Map[String, String] = Map()
+    claimsMap += ("iat" -> DateTime.now().getMillis.toString) //The timestamp when the JWT was created
+    claimsMap += ("exp" -> DateTime.now().plusDays(2).toString) //A timestamp defining an expiration time (end time) for the token
+    claimsMap += ("user_id" -> "xxxxx")
+
+    val claimsSet = JwtClaimsSet(claimsMap)
+    JsonWebToken(header, claimsSet, "secretkey")
   }
 
   def submitRegistration() = Action {

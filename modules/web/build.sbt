@@ -4,8 +4,7 @@ Common.serviceSettings("web")
 
 libraryDependencies ++= Common.commonDependencies ++: Seq(
   // Add here the specific dependencies for this module:
-  // jdbc,
-  // anorm
+
 )
 
 libraryDependencies += filters
