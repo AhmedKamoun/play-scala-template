@@ -43,7 +43,8 @@ class ConnectionController extends Controller {
 
   def socket() = WebSocket.tryAcceptWithActor[JsValue, JsValue] {
     request =>
-      Future.successful(request.session.get("APPLICATION.USER_ID") match {
+      Future.successful(
+        request.session.get("APPLICATION.USER_ID") match {
         case None => Left(Forbidden)
         case Some(user_id) => Right(Connection.props(user_id))
       })

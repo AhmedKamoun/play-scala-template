@@ -30,10 +30,11 @@ class Login extends SecuredController {
   )
 
   def login() = Action {
-    request =>
-      request.session.get("APPLICATION.ADMIN_ID") match {
+    implicit request =>
+      tokenService.getTokenClaim("admin_id") match {
         case Some(user_id) => Ok("you are already logged in!")
         case None => Ok(views.html.login.login(login_form))
+
       }
 
   }

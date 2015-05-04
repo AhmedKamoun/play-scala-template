@@ -52,16 +52,8 @@ class User extends Person {
   }
 
 
-  def comparePassword(password: String): Boolean = {
+  def comparePassword(password: String): Boolean = passwordHashCode.equals(crypt(password))
 
-    if (passwordHashCode.equals(crypt(password))) true
-    else {
-      false
-    }
-  }
-
-  def setPasswordHashCode(password: String) = {
-    this.passwordHashCode = crypt(password)
-  }
+  def setPasswordHashCode(password: String) = passwordHashCode = crypt(password)
 
 }
