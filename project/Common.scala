@@ -4,15 +4,19 @@ import sbt._
 object Common {
   // Settings for the app, i.e. the root project
   val appSettings = settings(appName)
+  val spring_version = "4.1.6.RELEASE"
+
   val commonDependencies = Seq(
     // Add your project dependencies here,
     "mysql" % "mysql-connector-java" % "5.1.10",
-    "org.springframework" % "spring-context" % "4.0.7.RELEASE",
-    "org.springframework" % "spring-orm" % "4.0.7.RELEASE",
-    "org.springframework" % "spring-jdbc" % "4.0.7.RELEASE",
-    "org.springframework" % "spring-tx" % "4.0.7.RELEASE",
-    "org.springframework" % "spring-test" % "4.0.7.RELEASE" % "test",
-    "org.springframework.data" % "spring-data-jpa" % "1.7.0.RELEASE",
+    "org.springframework" % "spring-context" % spring_version,
+    "org.springframework" % "spring-orm" % spring_version,
+    "org.springframework" % "spring-jdbc" % spring_version,
+    "org.springframework" % "spring-tx" % spring_version,
+    "org.springframework" % "spring-test" % spring_version % "test",
+    "org.springframework" % "spring-context-support" % spring_version,
+    "org.springframework.data" % "spring-data-jpa" % "1.7.2.RELEASE",
+    "net.sf.ehcache" % "ehcache" % "2.10.0",
     "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
     "org.hibernate" % "hibernate-core" % "4.3.6.Final",
     "org.hibernate" % "hibernate-ehcache" % "4.3.6.Final",

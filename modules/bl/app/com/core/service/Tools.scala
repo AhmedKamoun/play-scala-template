@@ -5,7 +5,7 @@ import play.api.Logger
 import scala.util.Random
 
 
-object tools {
+object Tools {
 
   def getRandomString = Random.alphanumeric.take(10).mkString
 

@@ -12,7 +12,7 @@ object MapPerformanceTest {
   def mapInitialize() = {
     if (testMap.isEmpty) {
       Logger.warn("map with 4000000 fields creation starts:")
-      tools.time({
+      Tools.time({
         for (i <- 1 until mapSize)
           testMap += ("hello" + i.toString + "world" + i.toString -> i.toLong)
       })

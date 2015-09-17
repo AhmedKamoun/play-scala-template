@@ -16,6 +16,7 @@ import play.api.data._
 import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
 import security.Secured
+import service.Tools
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
@@ -121,6 +122,18 @@ class Application extends Controller with Secured {
       Ok(
         Json.prettyPrint(Json.obj("all_persons" -> response.toList))
       )
+  }
+
+  def personsFromCache() = Action {
+    request =>
+
+      Tools.time(manService.findAll())
+
+      Tools.time(manService.findAll())
+
+      Tools.time(manService.findAll())
+
+      Ok
   }
 
   /**
