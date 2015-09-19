@@ -24,7 +24,8 @@
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/SimpleTest"/>
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost:3306/SimpleTest?useUnicode=true&amp;characterEncoding=utf-8"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
     </bean>
@@ -52,7 +53,7 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="generateDdl" value="true"/>
-                <property name="showSql" value="false"/>
+                <property name="showSql" value="true"/>
                 <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect"/>
                 <property name="database" value="MYSQL"/>
 
@@ -62,6 +63,10 @@
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                <prop key="hibernate.connection.CharSet">UTF-8</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+
                 <!--
                   <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
                   <prop key="hibernate.cache.use_query_cache">true</prop>
