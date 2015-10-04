@@ -5,7 +5,6 @@ object Common {
   // Settings for the app, i.e. the root project
   val appSettings = settings(appName)
   val spring_version = "4.1.6.RELEASE"
-
   val commonDependencies = Seq(
     // Add your project dependencies here,
     "mysql" % "mysql-connector-java" % "5.1.10",
@@ -27,11 +26,8 @@ object Common {
     "com.mysema.querydsl" % "querydsl-apt" % "3.4.3",
     "cglib" % "cglib" % "3.1",
     "c3p0" % "c3p0" % "0.9.1.2",
-    "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1"
-    // Add here more common dependencies:
-    // jdbc,
-    // anorm,
-    // ...
+    "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1",
+    "com.cloudinary" % "cloudinary-http42" % "1.2.1"
   )
 
   def appName = "Kamoun_Application"

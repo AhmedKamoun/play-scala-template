@@ -1,5 +1,7 @@
 package controllers.web
 
+import java.io.File
+
 import com.core.dal.LikePersonRepository
 import com.core.dal.person.{ManRepository, PersonRepository, WomanRepository}
 import com.core.dal.queryDSL.ManQueryDsl
@@ -7,7 +9,8 @@ import com.core.dom.person.{Man, Woman}
 import com.core.dto.PersonDTO
 import com.core.dto.PersonDTOWrites._
 import com.core.service.ManService
-import exception.{ErrorHandler, ErrorType, SystemException}
+import com.core.service.utils.UploadService
+import exception.{ErrorHandler, ErrorType, FailResult, SystemException}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
@@ -18,6 +21,7 @@ import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
 import security.Secured
 import service.Tools
+import exception.FailResultWrites._
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
@@ -38,6 +42,8 @@ class Application extends Controller with Secured {
   var manQueryDsl: ManQueryDsl = _
   @Autowired
   var manService: ManService = _
+  @Autowired
+  var uploadService: UploadService = _
 
   val logger: Logger = Logger(this.getClass())
 
@@ -160,7 +166,7 @@ class Application extends Controller with Secured {
       }
     }
     catch {
-      case exception:  SystemException => ErrorHandler.manageException(exception)
+      case exception: SystemException => ErrorHandler.manageException(exception)
 
     }
 
@@ -177,6 +183,48 @@ class Application extends Controller with Secured {
       throw SystemException("Throw exception: InternalServerError", ErrorType.InternalServerError)
     else
       throw new NullPointerException()
+  }
+
+
+  def uploadPicture() = Action(parse.multipartFormData) {
+    implicit request =>
+      val form = Form(
+        single(
+          "picture" -> ignored(Option.empty[File])
+        )
+
+      )
+      request.body.file("picture").map { picture =>
+
+        // handle the other form data
+        form.bindFromRequest.fold(
+          formWithErrors => {
+            BadRequest(formWithErrors.errorsAsJson)
+          },
+
+          data => {
+
+            try {
+
+              // retrieve the image and put it where you want...
+              var temporary_picture = uploadService.createFile()
+              picture.ref.moveTo(temporary_picture)
+              uploadService.uploadPicture(temporary_picture)
+              //delete temporaries files
+              temporary_picture.delete()
+              Ok("upload done")
+            }
+            catch {
+              case exception: SystemException => ErrorHandler.manageException(exception)
+
+            }
+
+          }
+        )
+
+      }.getOrElse(BadRequest(Json.toJson(FailResult("MISSING_UPLOADED_FILE"))))
+
+
   }
 
 
