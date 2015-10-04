@@ -28,6 +28,8 @@ POST           /addLikes                      @controllers.web.LikeController.ad
 DELETE         /removeLikes                   @controllers.web.LikeController.removeLikesFromPerson()
 GET            /getLikes                      @controllers.web.LikeController.getLikesToPerson()
 GET            /getLikesBy                    @controllers.web.LikeController.getLikesBy(description :String)
+GET            /throw-exception               @controllers.web.Application.exception(x: Int)
+
 
 #map read test
 GET            /searchFromMap                 @controllers.web.MapTestController.searchFromMap(key:String)

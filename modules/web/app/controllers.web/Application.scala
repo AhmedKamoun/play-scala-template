@@ -7,6 +7,7 @@ import com.core.dom.person.{Man, Woman}
 import com.core.dto.PersonDTO
 import com.core.dto.PersonDTOWrites._
 import com.core.service.ManService
+import exception.{ErrorHandler, ErrorType, SystemException}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
@@ -19,6 +20,7 @@ import security.Secured
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
+import scala.util.{Failure, Success, Try}
 
 @stereotype.Controller
 class Application extends Controller with Secured {
@@ -135,6 +137,33 @@ class Application extends Controller with Secured {
 
     // val list = manQueryDsl.personList()
     //Ok(Json.prettyPrint(list))
+  }
+
+  def exception(number: Int) = Action {
+    try {
+      throwException(number) match {
+        case Success(response) => Ok("success") //Success push
+        case Failure(exception) => ErrorHandler.manageException(exception)
+      }
+    }
+    catch {
+      case exception:  SystemException => ErrorHandler.manageException(exception)
+
+    }
+
+
+  }
+
+  @throws(classOf[SystemException])
+  def throwException(number: Int): Try[Unit] = {
+    if (number == 0)
+      Success(())
+    else if (number == 1)
+      Failure(SystemException("NotFoundResource", ErrorType.NotFoundResource))
+    else if (number == 2)
+      throw SystemException("Throw exception: InternalServerError", ErrorType.InternalServerError)
+    else
+      throw new NullPointerException()
   }
 
 

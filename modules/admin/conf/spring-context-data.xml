@@ -17,7 +17,7 @@
             				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
     <tx:annotation-driven/>
 
-    <context:component-scan base-package="controllers.admin, com.core.dal, com.core.service"/>
+    <context:component-scan base-package="configuration, controllers.admin, com.core.dal, com.core.service"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
@@ -69,5 +69,6 @@
 
 
     </bean>
+
 
 </beans>

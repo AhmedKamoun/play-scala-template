@@ -13,4 +13,7 @@ class AdministratorService {
     true
   }
 
+  def getString(value: String) = value
+
+
 }
