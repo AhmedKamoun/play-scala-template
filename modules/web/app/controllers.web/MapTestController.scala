@@ -28,7 +28,7 @@ class MapTestController extends Controller {
    * @return test read performance for map with long String key
    */
   def searchFromMap(key: String) = Action {
-    tools.time({
+    Tools.time({
 
       MapPerformanceTest.mapInitialize()
       MapPerformanceTest.testMap.get(key) match {

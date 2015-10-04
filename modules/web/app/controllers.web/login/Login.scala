@@ -13,7 +13,7 @@ import play.api.data.Forms._
 import play.api.data._
 import play.api.mvc.{Action, _}
 import security.Secured
-import service.tools
+import service.Tools
 
 @stereotype.Controller
 class Login extends Controller with Secured {
@@ -104,7 +104,7 @@ class Login extends Controller with Secured {
 
           //save new user
           var new_user = new User()
-          new_user.salt = tools.getRandomString
+          new_user.salt = Tools.getRandomString
           new_user.username = SucceededForm._1
           new_user.email = SucceededForm._2
           new_user.setPasswordHashCode(SucceededForm._3)

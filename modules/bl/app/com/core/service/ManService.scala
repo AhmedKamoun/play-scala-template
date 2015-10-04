@@ -5,9 +5,12 @@ import java.util.{List => JList}
 import com.core.dal.LikePersonRepository
 import com.core.dal.person.ManRepository
 import com.core.dom.LikePerson
+import com.core.dom.person.Person
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import play.api.Logger
 
 import scala.collection.JavaConversions._
 
@@ -50,5 +53,24 @@ class ManService {
     person.getLikes().toSet
   }
 
+
+  @Cacheable(value = Array("allPersons"))
+  def findAll(): List[Person] = {
+    Logger.debug("Starting querying persons ...")
+    slowQuery(2000l)
+    manRepository.findAll().toList
+
+
+  }
+
+  private def slowQuery(seconds: Long) {
+    try {
+      Thread.sleep(seconds);
+    } catch {
+      case e: InterruptedException => {
+        throw new IllegalStateException(e);
+      }
+    }
+  }
 
 }

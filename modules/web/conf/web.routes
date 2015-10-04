@@ -22,6 +22,7 @@ GET            /addWoman                      @controllers.web.Application.addWo
 POST           /addWoman                      @controllers.web.Application.submitWoman()
 GET            /artisteMen                    @controllers.web.Application.allArtistMen()
 GET            /persons                       @controllers.web.Application.allPersons()
+GET            /persons-cached                @controllers.web.Application.personsFromCache()
 GET            /TimeElepsed/:startTime        @controllers.web.Application.compositeResponse(startTime:Long)
 
 POST           /addLikes                      @controllers.web.LikeController.addLikesToPerson()
