@@ -34,15 +34,18 @@ object CloudinarySignWrites {
 object CloudinaryService {
 
   var cloudinary: Cloudinary = _
+  val cloud_name = "ahmed-kamoun"
+  val api_secret = "lGIZPZ8oI28ONz264oSuTWcTil8"
+  val api_key = "878623561675743"
 
   def getInstance(): Cloudinary = {
     Option(cloudinary) match {
       case Some(instance) => instance
       case None => {
         cloudinary = new Cloudinary(ObjectUtils.asMap(
-          "cloud_name", "ahmed-kamoun",
-          "api_key", "878623561675743",
-          "api_secret", "lGIZPZ8oI28ONz264oSuTWcTil8"))
+          "cloud_name", cloud_name,
+          "api_key", api_key,
+          "api_secret", api_secret))
         cloudinary
       }
     }
@@ -71,7 +74,7 @@ class UploadService {
       case None => {}
     }
 
-    val signature = CloudinaryService.getInstance().apiSignRequest(parameters, "lGIZPZ8oI28ONz264oSuTWcTil8")
+    val signature = CloudinaryService.getInstance().apiSignRequest(parameters, CloudinaryService.api_secret)
 
     CloudinarySign(timestamp.toString, folder, signature)
   }
