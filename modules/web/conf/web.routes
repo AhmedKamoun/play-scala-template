@@ -13,13 +13,11 @@ OPTIONS        /*all                           @controllers.web.login.Login.opti
 
 GET            /                               @controllers.web.login.Login.login()
 POST           /login                          @controllers.web.login.Login.submitLogin()
-POST           /registration                   @controllers.web.login.Login.submitRegistration()
+POST           /registration                   @controllers.web.login.Login.Registration()
 GET            /index                          @controllers.web.login.Login.index()
 GET            /logout                         @controllers.web.login.Login.logout()
 
 POST           /addMan                         @controllers.web.Application.submit()
-GET            /addWoman                       @controllers.web.Application.addWoman()
-POST           /addWoman                       @controllers.web.Application.submitWoman()
 GET            /artisteMen                     @controllers.web.Application.allArtistMen()
 GET            /persons                        @controllers.web.Application.allPersons()
 GET            /persons-cached                 @controllers.web.Application.personsFromCache()
@@ -30,8 +28,9 @@ DELETE         /removeLikes                    @controllers.web.LikeController.r
 GET            /getLikes                       @controllers.web.LikeController.getLikesToPerson()
 GET            /getLikesBy                     @controllers.web.LikeController.getLikesBy(description :String)
 GET            /throw-exception                @controllers.web.Application.exception(x: Int)
-POST            /upload-picture                 @controllers.web.Application.uploadPicture()
-
+POST           /upload-picture                 @controllers.web.Application.uploadPicture()
+GET            /generate-signature             @controllers.web.Application.generateSignature(folder: Option[String])
+GET            /upload-client-side             @controllers.web.Application.upload_picture_client_side(folder: Option[String])
 
 #map read test
 GET            /search-from-map                @controllers.web.MapTestController.searchFromMap(key:String)

@@ -92,7 +92,7 @@ class Login extends Controller with Secured {
     JsonWebToken(header, claimsSet, "secretkey")
   }
 
-  def submitRegistration() = Action {
+  def Registration() = Action {
     implicit request =>
       registration.bindFromRequest.fold(
         formWithErrors => {

@@ -5,11 +5,12 @@ import java.io.File
 import com.core.dal.LikePersonRepository
 import com.core.dal.person.{ManRepository, PersonRepository, WomanRepository}
 import com.core.dal.queryDSL.ManQueryDsl
-import com.core.dom.person.{Man, Woman}
+import com.core.dom.person.Man
 import com.core.dto.PersonDTO
 import com.core.dto.PersonDTOWrites._
 import com.core.service.ManService
 import com.core.service.utils.UploadService
+import exception.FailResultWrites._
 import exception.{ErrorHandler, ErrorType, FailResult, SystemException}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,11 +22,11 @@ import play.api.libs.json.Json
 import play.api.mvc.{Action, _}
 import security.Secured
 import service.Tools
-import exception.FailResultWrites._
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
+import com.core.service.utils.CloudinarySignWrites._
 
 @stereotype.Controller
 class Application extends Controller with Secured {
@@ -81,27 +82,9 @@ class Application extends Controller with Secured {
   }
 
 
-  def addWoman() = Action {
-    Ok(views.html.addDoctor(addWomanForm))
-  }
-
-  def submitWoman() = Action {
-    implicit request =>
-      addWomanForm.bindFromRequest.fold(
-        formWithErrors => {
-          BadRequest(views.html.addDoctor(formWithErrors))
-        }
-        ,
-        SucceededForm => {
-
-          var doctor = new Woman()
-          doctor.setName(SucceededForm._1)
-
-          womanRepository.save(doctor)
-
-          Ok(views.html.addDoctor(addWomanForm))
-        }
-      )
+  def upload_picture_client_side(folder:Option[String]) = Action {
+    val sign = uploadService.generateSignature(folder)
+    Ok(views.html.uploadPic(sign))
   }
 
 
@@ -227,5 +210,10 @@ class Application extends Controller with Secured {
 
   }
 
+  def generateSignature(folder:Option[String]) = Action {
+    implicit request =>
+      val data = uploadService.generateSignature(folder)
+      Ok(Json.toJson(data))
 
+  }
 }
