@@ -31,7 +31,7 @@ object CloudinarySignWrites {
   }
 }
 
-object CloudinaryService {
+object CloudinaryConfig {
 
   var cloudinary: Cloudinary = _
   val cloud_name = "ahmed-kamoun"
@@ -53,13 +53,13 @@ object CloudinaryService {
 }
 
 @Service
-class UploadService {
+class CloudinaryService {
   val logger: Logger = Logger(this.getClass())
 
 
   def uploadPicture(picture: File) = {
     val folder = "ahmed/kamoun/repo"
-    CloudinaryService.getInstance().uploader().upload(picture, ObjectUtils.asMap("folder", folder));
+    CloudinaryConfig.getInstance().uploader().upload(picture, ObjectUtils.asMap("folder", folder));
 
   }
 
@@ -74,11 +74,12 @@ class UploadService {
       case None => {}
     }
 
-    val signature = CloudinaryService.getInstance().apiSignRequest(parameters, CloudinaryService.api_secret)
+    val signature = CloudinaryConfig.getInstance().apiSignRequest(parameters, CloudinaryConfig.api_secret)
 
     CloudinarySign(timestamp.toString, folder, signature)
   }
 
+  def delete(public_id: String) = CloudinaryConfig.getInstance().uploader().destroy(public_id, ObjectUtils.asMap("invalidate", java.lang.Boolean.TRUE))
 
   /**
    * @author Kamoun Ahmed

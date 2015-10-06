@@ -9,7 +9,8 @@ import com.core.dom.person.Man
 import com.core.dto.PersonDTO
 import com.core.dto.PersonDTOWrites._
 import com.core.service.ManService
-import com.core.service.utils.UploadService
+import com.core.service.utils.CloudinaryService
+import com.core.service.utils.CloudinarySignWrites._
 import exception.FailResultWrites._
 import exception.{ErrorHandler, ErrorType, FailResult, SystemException}
 import org.joda.time.DateTime
@@ -26,7 +27,6 @@ import service.Tools
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
 import scala.util.{Failure, Success, Try}
-import com.core.service.utils.CloudinarySignWrites._
 
 @stereotype.Controller
 class Application extends Controller with Secured {
@@ -44,7 +44,7 @@ class Application extends Controller with Secured {
   @Autowired
   var manService: ManService = _
   @Autowired
-  var uploadService: UploadService = _
+  var uploadService: CloudinaryService = _
 
   val logger: Logger = Logger(this.getClass())
 
@@ -79,12 +79,6 @@ class Application extends Controller with Secured {
           Ok("new user was created")
         }
       )
-  }
-
-
-  def upload_picture_client_side(folder:Option[String]) = Action {
-    val sign = uploadService.generateSignature(folder)
-    Ok(views.html.uploadPic(sign))
   }
 
 
@@ -210,10 +204,25 @@ class Application extends Controller with Secured {
 
   }
 
-  def generateSignature(folder:Option[String]) = Action {
+  def generateSignature(folder: Option[String]) = Action {
     implicit request =>
       val data = uploadService.generateSignature(folder)
       Ok(Json.toJson(data))
 
   }
+
+  def delete(public_id: String) = Action {
+    implicit request =>
+      uploadService.delete(public_id)
+      Ok("DELETING DONE")
+
+  }
+
+
+  def upload_picture_client_side(folder: Option[String]) = Action {
+    val sign = uploadService.generateSignature(folder)
+    Ok(views.html.uploadPic(sign))
+  }
+
+
 }

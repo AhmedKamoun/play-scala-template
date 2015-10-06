@@ -31,7 +31,7 @@ GET            /throw-exception                @controllers.web.Application.exce
 POST           /upload-picture                 @controllers.web.Application.uploadPicture()
 GET            /generate-signature             @controllers.web.Application.generateSignature(folder: Option[String])
 GET            /upload-client-side             @controllers.web.Application.upload_picture_client_side(folder: Option[String])
-
+DELETE         /delete-file                    @controllers.web.Application.delete(public_id: String)
 #map read test
 GET            /search-from-map                @controllers.web.MapTestController.searchFromMap(key:String)
 
