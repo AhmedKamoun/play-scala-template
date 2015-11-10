@@ -5,6 +5,9 @@
 # *.[oa]
 # *~
 
+#ignore production system file
+Loyalcraft-EndUser/conf/production.conf
+
 #Ignore all UNIX temporary files
 *~
 #PLAYFRAMEWORK
@@ -16,11 +19,32 @@ tmp
 dist
 .cache
 RUNNING_PID
+nohup.out
 
+logs
+project/project
+project/target
+target
+tmp
+.history
+dist
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
+
+    
 #IntelliJ IDE
 .idea/
 *.iml
 *.iws
+
+#meld merge tool
+*.orig
 
 
 
@@ -103,3 +127,5 @@ local.properties
 
 # PDT-specific
 .buildpath
+/nbproject/private/
+/nbproject/

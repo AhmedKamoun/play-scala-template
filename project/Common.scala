@@ -4,7 +4,7 @@ import sbt._
 object Common {
   // Settings for the app, i.e. the root project
   val appSettings = settings(appName)
-  val spring_version = "4.1.6.RELEASE"
+  val spring_version = "4.1.7.RELEASE"
   val commonDependencies = Seq(
     // Add your project dependencies here,
     "mysql" % "mysql-connector-java" % "5.1.10",
@@ -14,7 +14,7 @@ object Common {
     "org.springframework" % "spring-tx" % spring_version,
     "org.springframework" % "spring-test" % spring_version % "test",
     "org.springframework" % "spring-context-support" % spring_version,
-    "org.springframework.data" % "spring-data-jpa" % "1.7.2.RELEASE",
+    "org.springframework.data" % "spring-data-jpa" % "1.9.0.RELEASE",
     "net.sf.ehcache" % "ehcache" % "2.10.0",
     "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
     "org.hibernate" % "hibernate-core" % "4.3.6.Final",
@@ -29,7 +29,7 @@ object Common {
     "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1",
     "com.cloudinary" % "cloudinary-http42" % "1.2.1"
   )
-
+  
   def appName = "Kamoun_Application"
 
   // Settings for every service, i.e. for admin and web subprojects
