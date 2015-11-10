@@ -29,7 +29,7 @@ object Common {
     "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1",
     "com.cloudinary" % "cloudinary-http42" % "1.2.1"
   )
-  
+
   def appName = "Kamoun_Application"
 
   // Settings for every service, i.e. for admin and web subprojects
