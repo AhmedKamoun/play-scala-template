@@ -108,7 +108,6 @@ class Login extends Controller with Secured {
           new_user.username = SucceededForm._1
           new_user.email = SucceededForm._2
           new_user.setPasswordHashCode(SucceededForm._3)
-          new_user.createdOn = DateTime.now(DateTimeZone.UTC) //relatively to UTC
           userRepository.save(new_user)
           Logger.debug("registration succeeded !")
           val session = request.session + ("APPLICATION.USER_ID" -> new_user.id)

@@ -4,11 +4,11 @@ import java.math.BigInteger
 import java.security.{MessageDigest, NoSuchAlgorithmException}
 import javax.persistence._
 
+import com.core.dom.MainEntity
 import play.api.Logger
 
 @Entity
-@DiscriminatorValue(value = "user")
-class User extends Person {
+class User extends MainEntity {
 
   var salt: String = _
 

@@ -18,6 +18,7 @@ GET            /index                          @controllers.web.login.Login.inde
 GET            /logout                         @controllers.web.login.Login.logout()
 
 POST           /addMan                         @controllers.web.Application.submit()
+POST           /fill-men                       @controllers.web.Application.fillWithMen()
 GET            /artisteMen                     @controllers.web.Application.allArtistMen()
 GET            /persons                        @controllers.web.Application.allPersons()
 GET            /persons-cached                 @controllers.web.Application.personsFromCache()

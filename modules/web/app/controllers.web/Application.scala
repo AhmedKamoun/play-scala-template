@@ -8,6 +8,7 @@ import com.core.dal.queryDSL.ManQueryDsl
 import com.core.dom.person.Man
 import com.core.dto.PersonDTO
 import com.core.dto.PersonDTOWrites._
+import com.core.enumeration.Visibility
 import com.core.service.ManService
 import com.core.service.utils.CloudinaryService
 import com.core.service.utils.CloudinarySignWrites._
@@ -79,6 +80,19 @@ class Application extends Controller with Secured {
           Ok("new user was created")
         }
       )
+  }
+
+  def fillWithMen() = Action {
+    implicit request =>
+      var men: List[Man] = List()
+
+      var new_man: Man = new Man()
+      new_man.name = "Zainab Kamoun"
+      new_man.age = 26
+      new_man.setVisibility(Visibility.Deleted)
+      personRepository.save(new_man)
+
+      Ok
   }
 
 

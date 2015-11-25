@@ -29,4 +29,5 @@ abstract class Person extends MainEntity {
   var likes: java.util.Set[LikePerson] = new java.util.HashSet[LikePerson]()
 
 
+
 }
