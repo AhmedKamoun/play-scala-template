@@ -29,10 +29,14 @@ DELETE         /removeLikes                    @controllers.web.LikeController.r
 GET            /getLikes                       @controllers.web.LikeController.getLikesToPerson()
 GET            /getLikesBy                     @controllers.web.LikeController.getLikesBy(description :String)
 GET            /throw-exception                @controllers.web.Application.exception(x: Int)
-POST           /upload-picture                 @controllers.web.Application.uploadPicture()
-GET            /generate-signature             @controllers.web.Application.generateSignature(folder: Option[String])
-GET            /upload-client-side             @controllers.web.Application.upload_picture_client_side(folder: Option[String])
-DELETE         /delete-file                    @controllers.web.Application.delete(public_id: String)
+POST           /upload-picture                 @controllers.web.CloudinaryAPIs.uploadPicture()
+GET            /generate-signature             @controllers.web.CloudinaryAPIs.generateSignature(folder: Option[String])
+GET            /upload-client-side             @controllers.web.CloudinaryAPIs.upload_picture_client_side(folder: Option[String])
+DELETE         /delete-file                    @controllers.web.CloudinaryAPIs.delete(public_id: String)
+PUT            /remove-tags                    @controllers.web.CloudinaryAPIs.remove_tmp_tag(public_id:String)
+DELETE         /cloudinary/tmp-pics            @controllers.web.CloudinaryAPIs.deleteTemporaryPictures()
+GET            /cloudinary/tmp-pics            @controllers.web.CloudinaryAPIs.getTemporaryPictures()
+
 #map read test
 GET            /search-from-map                @controllers.web.MapTestController.searchFromMap(key:String)
 

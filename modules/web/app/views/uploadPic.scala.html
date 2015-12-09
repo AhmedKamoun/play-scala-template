@@ -4,10 +4,10 @@
 
     <script>
     $.cloudinary.config({ cloud_name: 'ahmed-kamoun', api_key: '878623561675743'})
-</script>
+    </script>
 
 
     <input name="file" type="file"
     class="cloudinary-fileupload" data-cloudinary-field="image_id"
-    data-form-data='{"signature": "@data.signature","timestamp": "@data.timestamp" ,"folder": "@data.folder.getOrElse("")" ,"api_key": "878623561675743"}' />
+    data-form-data='{"tags":"temporary", "signature": "@data.signature","timestamp": "@data.timestamp","folder": "@data.folder.getOrElse("")" ,"api_key": "878623561675743"}' />
 }

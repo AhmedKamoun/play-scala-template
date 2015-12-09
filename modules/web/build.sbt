@@ -8,3 +8,5 @@ libraryDependencies ++= Common.commonDependencies ++: Seq(
 )
 
 libraryDependencies += filters
+
+libraryDependencies += ws

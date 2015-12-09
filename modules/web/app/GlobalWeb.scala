@@ -1,5 +1,6 @@
 import akka.actor.Props
 import controllers.web.actors.Register
+import controllers.web.actors.scheduling.TemporaryPicturesCleaner
 import exception.FailResult
 import exception.FailResultWrites._
 import org.springframework.context._
@@ -26,6 +27,7 @@ object GlobalWeb extends WithFilters(CORSFilter, SecurityHeadersFilter()) with G
 
     //Create a register for client connection actor
     val clientsRegister = Akka.system.actorOf(Props[Register], name = "ClientsRegister")
+    val temporaryPicturesCleaner = Akka.system.actorOf(Props[TemporaryPicturesCleaner], name = "TemporaryPicturesCleaner")
 
   }
 

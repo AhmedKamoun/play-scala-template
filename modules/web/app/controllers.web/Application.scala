@@ -6,27 +6,32 @@ import com.core.dal.LikePersonRepository
 import com.core.dal.person.{ManRepository, PersonRepository, WomanRepository}
 import com.core.dal.queryDSL.ManQueryDsl
 import com.core.dom.person.Man
-import com.core.dto.PersonDTO
+import com.core.dto.CloudinaryResponseBuilder._
 import com.core.dto.PersonDTOWrites._
+import com.core.dto.{CloudinaryResponse, PersonDTO}
 import com.core.enumeration.Visibility
 import com.core.service.ManService
-import com.core.service.utils.CloudinaryService
 import com.core.service.utils.CloudinarySignWrites._
+import com.core.service.utils.{CloudinaryConfig, CloudinaryService}
 import exception.FailResultWrites._
 import exception.{ErrorHandler, ErrorType, FailResult, SystemException}
 import org.joda.time.DateTime
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype
 import play.api.Logger
+import play.api.Play.current
+import play.api.data.Form
 import play.api.data.Forms._
-import play.api.data._
-import play.api.libs.json.Json
+import play.api.http.{HeaderNames, MimeTypes}
+import play.api.libs.json._
+import play.api.libs.ws.{WS, WSAuthScheme}
 import play.api.mvc.{Action, _}
 import security.Secured
 import service.Tools
 
 import scala.collection.JavaConversions._
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success, Try}
 
 @stereotype.Controller
@@ -119,7 +124,7 @@ class Application extends Controller with Secured {
         response += dto
       }
       Ok(
-        Json.prettyPrint(Json.obj("all_persons" -> response.toList))
+        Json.prettyPrint(Json.obj("all_persons" -> Json.toJson(response.toList)))
       )
   }
 
@@ -174,68 +179,6 @@ class Application extends Controller with Secured {
       throw SystemException("Throw exception: InternalServerError", ErrorType.InternalServerError)
     else
       throw new NullPointerException()
-  }
-
-
-  def uploadPicture() = Action(parse.multipartFormData) {
-    implicit request =>
-      val form = Form(
-        single(
-          "picture" -> ignored(Option.empty[File])
-        )
-
-      )
-      request.body.file("picture").map { picture =>
-
-        // handle the other form data
-        form.bindFromRequest.fold(
-          formWithErrors => {
-            BadRequest(formWithErrors.errorsAsJson)
-          },
-
-          data => {
-
-            try {
-
-              // retrieve the image and put it where you want...
-              var temporary_picture = uploadService.createFile()
-              picture.ref.moveTo(temporary_picture)
-              uploadService.uploadPicture(temporary_picture)
-              //delete temporaries files
-              temporary_picture.delete()
-              Ok("upload done")
-            }
-            catch {
-              case exception: SystemException => ErrorHandler.manageException(exception)
-
-            }
-
-          }
-        )
-
-      }.getOrElse(BadRequest(Json.toJson(FailResult("MISSING_UPLOADED_FILE"))))
-
-
-  }
-
-  def generateSignature(folder: Option[String]) = Action {
-    implicit request =>
-      val data = uploadService.generateSignature(folder)
-      Ok(Json.toJson(data))
-
-  }
-
-  def delete(public_id: String) = Action {
-    implicit request =>
-      uploadService.delete(public_id)
-      Ok("DELETING DONE")
-
-  }
-
-
-  def upload_picture_client_side(folder: Option[String]) = Action {
-    val sign = uploadService.generateSignature(folder)
-    Ok(views.html.uploadPic(sign))
   }
 
 
