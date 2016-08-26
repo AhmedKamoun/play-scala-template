@@ -4,28 +4,28 @@ import sbt._
 object Common {
   // Settings for the app, i.e. the root project
   val appSettings = settings(appName)
-  val spring_version = "4.1.7.RELEASE"
+  val spring_version = "4.2.6.RELEASE"
   val commonDependencies = Seq(
     // Add your project dependencies here,
-    "mysql" % "mysql-connector-java" % "5.1.10",
+    "mysql" % "mysql-connector-java" % "5.1.39",
     "org.springframework" % "spring-context" % spring_version,
     "org.springframework" % "spring-orm" % spring_version,
     "org.springframework" % "spring-jdbc" % spring_version,
     "org.springframework" % "spring-tx" % spring_version,
     "org.springframework" % "spring-test" % spring_version % "test",
     "org.springframework" % "spring-context-support" % spring_version,
-    "org.springframework.data" % "spring-data-jpa" % "1.9.0.RELEASE",
+    "org.springframework.data" % "spring-data-jpa" % "1.9.4.RELEASE",
     "net.sf.ehcache" % "ehcache" % "2.10.0",
-    "org.hibernate" % "hibernate-entitymanager" % "4.3.6.Final",
-    "org.hibernate" % "hibernate-core" % "4.3.6.Final",
-    "org.hibernate" % "hibernate-ehcache" % "4.3.6.Final",
-    "org.hibernate" % "hibernate-validator" % "5.1.2.Final",
-    "org.hibernate.javax.persistence" % "hibernate-jpa-2.0-api" % "1.0.1.Final",
+    "org.hibernate" % "hibernate-entitymanager" % "4.3.11.Final",
+    "org.hibernate" % "hibernate-core" % "4.3.11.Final",
+    "org.hibernate" % "hibernate-ehcache" % "4.3.11.Final",
+    "org.hibernate" % "hibernate-validator" % "4.3.2.Final",
+    "org.hibernate.javax.persistence" % "hibernate-jpa-2.1-api" % "1.0.0.Final",
     "org.jadira.usertype" % "usertype.jodatime" % "2.0.1",
     "com.mysema.querydsl" % "querydsl-jpa" % "3.4.3",
     "com.mysema.querydsl" % "querydsl-apt" % "3.4.3",
-    "cglib" % "cglib" % "3.1",
-    "c3p0" % "c3p0" % "0.9.1.2",
+    "cglib" % "cglib" % "3.2.3",
+    "com.mchange" % "c3p0" % "0.9.5.2",
     "com.jason-goodwin" %% "authentikat-jwt" % "0.4.1",
     "com.cloudinary" % "cloudinary-http42" % "1.2.1"
   )

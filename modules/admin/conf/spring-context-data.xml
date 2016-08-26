@@ -19,12 +19,23 @@
 
     <context:component-scan base-package="configuration, controllers.admin, com.core.dal, com.core.service"/>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/SimpleTest"/>
         <property name="user" value="root"/>
         <property name="password" value="root"/>
+
+        <!-- Pool properties -->
+        <!-- http://www.mchange.com/projects/c3p0/#basic_pool_configuration -->
+        <property name="initialPoolSize" value="5"/>
+        <property name="minPoolSize" value="5"/>
+        <property name="maxPoolSize" value="100"/>
+        <property name="acquireIncrement" value="1"/>
+        <property name="maxStatements" value="50"/>
+        <property name="maxConnectionAge" value="7200"/>
+        <property name="maxIdleTime" value="900"/>
+        <property name="maxIdleTimeExcessConnections" value="300"/>
     </bean>
 
     <!-- Used for Spring DATA JPA -->
@@ -59,10 +70,17 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.generate_statistics">false</prop>
+
+                <!--
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
-                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.region.factory_class">
+                    org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+                </prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
-                <prop key="hibernate.generate_statistics">true</prop>
+                <prop key="hibernate.cache.provider_configuration_file_resource_path">ehcache.xml</prop>
+                -->
+
             </props>
 
         </property>

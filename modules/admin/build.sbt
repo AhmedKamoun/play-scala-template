@@ -8,4 +8,5 @@ libraryDependencies ++= Common.commonDependencies ++: Seq(
   // anorm
 )
 
+libraryDependencies += ws
 libraryDependencies += filters

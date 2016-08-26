@@ -15,7 +15,6 @@ GET            /                    @controllers.admin.login.Login.login()
 POST           /login               @controllers.admin.login.Login.submitLogin()
 GET            /index               @controllers.admin.login.Login.index()
 GET            /adminInfo           @controllers.admin.Application.getAdmin()
-
 GET            /test                @controllers.admin.Application.testService()
 
 
